@@ -1,13 +1,8 @@
 var form = document.getElementById('addForm');
 var itemList = document.getElementById('items');
-var filter = document.getElementById('filter');
 
-// Form submit event
+// Form submit event 
 form.addEventListener('submit', addItem);
-// Delete event
-itemList.addEventListener('click', removeItem);
-// Filter event
-filter.addEventListener('keyup', filterItems);
 
 // Add item
 function addItem(e){
@@ -18,15 +13,17 @@ function addItem(e){
 
   // Create new li element
   var li = document.createElement('li');
+
   // Add class
   li.className = 'list-group-item';
+  
   // Add text node with input value
   li.appendChild(document.createTextNode(newItem));
 
-  // Create del button element
+  // Create delete button elelment
   var deleteBtn = document.createElement('button');
 
-  // Add classes to del button
+  // Add classes to delete button
   deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
 
   // Append text node
@@ -35,33 +32,31 @@ function addItem(e){
   // Append button to li
   li.appendChild(deleteBtn);
 
-  // Append li to list
   itemList.appendChild(li);
 }
 
+// Delete event
+itemList.addEventListener('click', removeItem);
+
 // Remove item
-function removeItem(e){
+function removeItem(e) {
+
   if(e.target.classList.contains('delete')){
-    if(confirm('Are You Sure?')){
+    if(confirm('Are you Sure?')){
       var li = e.target.parentElement;
       itemList.removeChild(li);
     }
   }
 }
 
-// Filter Items
-function filterItems(e){
-  // convert text to lowercase
-  var text = e.target.value.toLowerCase();
-  // Get lis
-  var items = itemList.getElementsByTagName('li');
-  // Convert to an array
-  Array.from(items).forEach(function(item){
-    var itemName = item.firstChild.textContent;
-    if(itemName.toLowerCase().indexOf(text) != -1){
-      item.style.display = 'block';
-    } else {
-      item.style.display = 'none';
-    }
-  });
-}
+// Placeholder event listener for the "Edit" button
+itemList.addEventListener('click', function (e) {
+  if (e.target.classList.contains('edit')) {
+    // Handle the edit functionality here when you implement it
+    // For now, you can log a message as a placeholder
+    console.log('Edit button clicked');
+  }
+});
+
+
+
